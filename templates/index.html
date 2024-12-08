@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block main %}
+
+    <div class="container">
+        <h1>Dashboard Analytics</h1>
+        <div class="dashboard">
+            <h3>Expected Compute Needs</h3>
+            <p> {{ output }} </p>
+
+            <h3>Recommended Compute Purchase</h3>
+            <p> {{ output[1] }} </p>
+
+            <div class="provider">
+                <h3>Expected Compute Range</h3>
+                <p>10-20 vCPUs, 32-64 GB RAM</p>
+            </div>
+
+
+            <h3>Recommended Compute Purchase</h3>
+            <p>16 vCPUs, 48 GB RAM (Confidence: 85%)</p>
+
+            <h2>Top 3 Recommended Cloud Providers</h2>
+            <div class="provider">
+                <h3>1. Amazon Web Services (AWS)</h3>
+                <p><strong>Recommended Service:</strong> EC2 c5.4xlarge</p>
+                <p><strong>Expected Cost:</strong> $500/month</p>
+                <div class="cost-breakdown">
+                    <h4>Cost Breakdown:</h4>
+                    <ul>
+                        <li>Compute: $400</li>
+                        <li>Storage: $50</li>
+                        <li>Data Transfer: $50</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="provider">
+                <h3>2. Microsoft Azure</h3>
+                <p><strong>Recommended Service:</strong> D16s v3</p>
+                <p><strong>Expected Cost:</strong> $520/month</p>
+                <div class="cost-breakdown">
+                    <h4>Cost Breakdown:</h4>
+                    <ul>
+                        <li>Compute: $420</li>
+                        <li>Storage: $60</li>
+                        <li>Data Transfer: $40</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="provider">
+                <h3>3. Google Cloud Platform (GCP)</h3>
+                <p><strong>Recommended Service:</strong> n2-standard-16</p>
+                <p><strong>Expected Cost:</strong> $480/month</p>
+                <div class="cost-breakdown">
+                    <h4>Cost Breakdown:</h4>
+                    <ul>
+                        <li>Compute: $380</li>
+                        <li>Storage: $60</li>
+                        <li>Data Transfer: $40</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
