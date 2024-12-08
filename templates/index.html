@@ -10,12 +10,12 @@
         <h1>Dashboard Analytics</h1>
         <div class="dashboard">
             <h3>Expected Compute Needs</h3>
-            <p> {{ output }} </p>
 
-            <p> {{ output[0] }} </p>
-            <p> {{ output[1] }} </p>
-            <p> {{ output[2] }} </p>
-            <p> {{ output[4] }} </p>
+            <ul>
+                {% for value in output %}
+                  <li>{{ value }}</li>
+                {% endfor %}
+            </ul>
 
             <h3>Recommended Compute Purchase</h3>
 

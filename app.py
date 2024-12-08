@@ -134,7 +134,7 @@ Format the output with bullet points.
     #pretrained assistant, output in JSON file
     run = client.beta.threads.runs.create_and_poll(
         thread_id=thread.id,
-        assistant_id="asst_yt1SYD7fWD32r5KpoFbaG0YT",
+        assistant_id="asst_ss6AB1S98ttDFE6TFEaV2YmU",
     )
 
     response_message = None
