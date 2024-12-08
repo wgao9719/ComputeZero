@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Demo
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <h1>Cloud Compute Recommendation</h1>
+        <form id="recommendationForm" action="/input" method="post">
+            <div class="form-group">
+                <label for="providers">Interested Providers:</label>
+                <select id="providers" name="providers" multiple required>
+                    <option value="aws">Amazon Web Services</option>
+                    <option value="azure">Microsoft Azure</option>
+                    <option value="gcp">Google Cloud Platform</option>
+                    <option value="ibm">IBM Cloud</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="industry">Industry:</label>
+                <input type="text" id="industry" name="industry" required>
+            </div>
+            <div class="form-group">
+                <label for="timeframe">Projected Timeframe (months):</label>
+                <input type="number" id="timeframe" name="timeframe" min="1" required>
+            </div>
+            <div class="form-group">
+                <label for="usage">Estimated Usage (hours/month):</label>
+                <input type="number" id="usage" name="usage" min="1" required>
+            </div>
+            <div class="form-group">
+                <label for="technicalDetails">Technical Details:</label>
+                <textarea id="technicalDetails" name="technicalDetails" rows="5" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="attachments">Relevant Technical Attachments:</label>
+                <input type="file" id="attachments" name="attachments" multiple>
+            </div>
+            <button type="submit">Get Recommendation</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+
+{% endblock %}
+
+
