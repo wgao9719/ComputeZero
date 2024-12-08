@@ -134,7 +134,7 @@ Format the output with bullet points.
     #pretrained assistant, output in JSON file
     run = client.beta.threads.runs.create_and_poll(
         thread_id=thread.id,
-        assistant_id="asst_ss6AB1S98ttDFE6TFEaV2YmU",
+        assistant_id="asst_yt1SYD7fWD32r5KpoFbaG0YT",
     )
 
     response_message = None
@@ -162,34 +162,23 @@ def extract():
     except json.JSONDecodeError as e:
         return [f"Error decoding JSON: {str(e)}"]
 
-    schema_details = output_json.get("schema", {}).get("properties", {})
+    info_list = []
 
-    extracted_info = {}
+    def extract_info(d, parent_key=''):
+        if isinstance(d, dict):
+            for k, v in d.items():
+                new_key = f"{k}" if parent_key else k
+                extract_info(v, new_key)
+        elif isinstance(d, list):
+            for i, item in enumerate(d):
+                new_key = f"{parent_key}[{i}]"
+                extract_info(item, new_key)
+        else:
+            info_list.append(f"{parent_key}: {d}")
 
-    # Extract details for each section
-    for key, details in schema_details.items():
-        section_info = {}
-        if "properties" in details:
-            for prop, prop_details in details["properties"].items():
-                section_info[prop] = {
-                    "type": prop_details.get("type", "unknown"),
-                    "description": prop_details.get("description", "No description provided")
-                }
+    extract_info(output_json)
 
-        extracted_info[key] = section_info
-
-    # data = []
-
-    # # Extract required fields
-    # parameters = output_json["properties"]
-    # data.extend(parameters["required"])
-
-    # # Extract descriptions of each property
-    # for key, value in parameters["properties"].items():
-    #     if "description" in value:
-    #         data.append(value["description"])
-
-    return extracted_info
+    return info_list
 
 
 @app.route("/login", methods=["GET", "POST"])

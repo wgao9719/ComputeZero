@@ -12,23 +12,25 @@
             <h3>Expected Compute Needs</h3>
             <p> {{ output }} </p>
 
-            <h3>Recommended Compute Purchase</h3>
+            <p> {{ output[0] }} </p>
             <p> {{ output[1] }} </p>
+            <p> {{ output[2] }} </p>
+            <p> {{ output[4] }} </p>
+
+            <h3>Recommended Compute Purchase</h3>
 
             <div class="provider">
                 <h3>Expected Compute Range</h3>
                 <p>10-20 vCPUs, 32-64 GB RAM</p>
             </div>
 
-
-            <h3>Recommended Compute Purchase</h3>
-            <p>16 vCPUs, 48 GB RAM (Confidence: 85%)</p>
-
             <h2>Top 3 Recommended Cloud Providers</h2>
             <div class="provider">
-                <h3>1. Amazon Web Services (AWS)</h3>
-                <p><strong>Recommended Service:</strong> EC2 c5.4xlarge</p>
-                <p><strong>Expected Cost:</strong> $500/month</p>
+                <h3>1. {{ output[5] }} </h3>
+                <p><strong>Recommended Service:</strong> {{ output[6] }} </p>
+                <p><strong>Expected Cost:</strong> {{ output[7] }} </p>
+                <p><strong>Total Cost:</strong> {{ output[8] }} </p>
+
                 <div class="cost-breakdown">
                     <h4>Cost Breakdown:</h4>
                     <ul>
@@ -40,32 +42,41 @@
             </div>
 
             <div class="provider">
-                <h3>2. Microsoft Azure</h3>
-                <p><strong>Recommended Service:</strong> D16s v3</p>
-                <p><strong>Expected Cost:</strong> $520/month</p>
+                <h3>2. {{ output[9] }} </h3>
+                <p><strong>Recommended Service:</strong> {{ output[10] }} </p>
+                <p><strong>Expected Cost:</strong> {{ output[11] }} </p>
+                <p><strong>Total Cost:</strong> {{ output[12] }} </p>
+
                 <div class="cost-breakdown">
                     <h4>Cost Breakdown:</h4>
                     <ul>
-                        <li>Compute: $420</li>
-                        <li>Storage: $60</li>
-                        <li>Data Transfer: $40</li>
+                        <li>Compute: $400</li>
+                        <li>Storage: $50</li>
+                        <li>Data Transfer: $50</li>
                     </ul>
                 </div>
             </div>
 
+
             <div class="provider">
-                <h3>3. Google Cloud Platform (GCP)</h3>
-                <p><strong>Recommended Service:</strong> n2-standard-16</p>
-                <p><strong>Expected Cost:</strong> $480/month</p>
+                <h3>3. {{ output[13] }} </h3>
+                <p><strong>Recommended Service:</strong> {{ output[14] }} </p>
+                <p><strong>Expected Cost:</strong> {{ output[15] }} </p>
+                <p><strong>Total Cost:</strong> {{ output[16] }} </p>
+
                 <div class="cost-breakdown">
                     <h4>Cost Breakdown:</h4>
                     <ul>
-                        <li>Compute: $380</li>
-                        <li>Storage: $60</li>
-                        <li>Data Transfer: $40</li>
+                        <li>Compute: $400</li>
+                        <li>Storage: $50</li>
+                        <li>Data Transfer: $50</li>
                     </ul>
                 </div>
             </div>
+
+            <h3>Explanation</h3>
+            <p> {{ output[17] }} </p>
+
         </div>
     </div>
 
