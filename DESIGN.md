@@ -5,8 +5,7 @@ The user's input (username and hashed password) is stored in a SQL database call
 allows them to indirectly interface with the model. We include several possible datapoints, including: interested providers, industry, timeframe, estimated usage, technical details, and document
 input. These are fed into users.db under the inputs table, along with the user ID.
 
-The backend is meant to use the input to produce output for the dashboard. Using the input data stored in users.db, we can make API calls to an OpenAI assistant. We use a GPT-4o-mini assistant 
-we custom designed for cloud compute purposes (SScale, uploaded to HuggingFace). SScale uses a set of 10 additional documents in its vector database and provides all outputs in a rigid JSON schema.
+The backend is meant to use the input to produce output for the dashboard. Using the input data stored in users.db, we can make API calls to an OpenAI assistant. We use a GPT-4o-mini assistant SScale we custom-designed for cloud compute queries. SScale uses a set of 10 additional documents in its vector database and provides all outputs in a rigid JSON schema.
 When calling SScale, we retrieve the most recent unique user input and use a specific prompt (refer to app.py) to interface with the model through the OpenAI module. The JSON structured input 
 (JSON structure shown in the prompt and model specs) is stored in users.db under the outputs table. 
 
