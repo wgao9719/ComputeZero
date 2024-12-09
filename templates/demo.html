@@ -8,10 +8,10 @@
 {% block main %}
     <div class="container">
         <h1>Cloud Compute Recommendation</h1>
-        <!-- Form to get user inputs for compute recommendations -->
+    <!-- Form to get user inputs for compute recommendations -->
         <form id="recommendationForm" action="/input" method="post">
 
-            <!-- Checkboxes to select cloud providers user is currently interested in-->
+        <!-- Checkboxes to select cloud providers user is currently interested in-->
             <div class="form-group">
                 <label for="providers">Interested Providers:</label>
                 <div>
@@ -40,44 +40,42 @@
                 </div>
             </div>
 
-            <!-- Input for user's industry -->
+        <!-- Input for user's industry -->
             <div class="form-group">
                 <label for="industry">Industry:</label>
                 <input type="text" id="industry" name="industry" required>
             </div>
 
-            <!-- Input for the timeframe -->
+        <!-- Input for the timeframe -->
             <div class="form-group">
                 <label for="timeframe">Projected Timeframe (months):</label>
                 <input type="number" id="timeframe" name="timeframe" min="1" required>
             </div>
 
-            <!-- Input for estimated usage -->
+        <!-- Input for estimated usage -->
             <div class="form-group">
                 <label for="usage">Estimated Usage (hours/month):</label>
                 <input type="number" id="usage" name="usage" min="1" required>
             </div>
 
-            <!-- Input for any technical details -->
+        <!-- Input for any technical details -->
             <div class="form-group">
                 <label for="technicalDetails">Technical Details:</label>
                 <textarea id="technicalDetails" name="technicalDetails" rows="5" required></textarea>
             </div>
 
-            <!-- File upload for any attachments -->
+        <!-- File upload for any attachments -->
             <div class="form-group">
                 <label for="attachments">Relevant Technical Attachments:</label>
                 <input type="file" id="attachments" name="attachments" multiple>
             </div>
 
-            <!-- Submit button -->
+        <!-- Submit button -->
             <button type="submit">Get Recommendation</button>
         </form>
     </div>
 
-    <!-- External JavaScript file-->
+<!-- External JavaScript file-->
     <script src="script.js"></script>
 
 {% endblock %}
-
-

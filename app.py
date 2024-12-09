@@ -12,6 +12,9 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import login_required, create_stacked_bar_chart
 
+# to get the the time for the history section
+from datetime import datetime
+
 # Configure application
 app = Flask(__name__)
 
@@ -22,9 +25,10 @@ Session(app)
 
 # SQLite3 database storing the following tables: users, inputs, outputs
 db = SQL("sqlite:///users.db")
-#CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username TEXT NOT NULL, password TEXT NOT NULL);
-#CREATE TABLE inputs (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, user_id INTEGER NOT NULL, providers TEXT NOT NULL, industry TEXT NOT NULL, timeframe INT NOT NULL, usage INT NOT NULL, technicalDetails TEXT NOT NULL, attachments BLOB);
-#CREATE TABLE outputs (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, user_id INTEGER NOT NULL, response TEXT NOT NULL);
+# CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, username TEXT NOT NULL, password TEXT NOT NULL);
+# CREATE TABLE inputs (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, user_id INTEGER NOT NULL, providers TEXT NOT NULL, industry TEXT NOT NULL, timeframe INT NOT NULL, usage INT NOT NULL, technicalDetails TEXT NOT NULL, attachments BLOB);
+# CREATE TABLE outputs (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, user_id INTEGER NOT NULL, response TEXT NOT NULL);
+
 
 @app.after_request
 def after_request(response):
@@ -33,6 +37,7 @@ def after_request(response):
     response.headers["Expires"] = 0
     response.headers["Pragma"] = "no-cache"
     return response
+
 
 @app.route("/")
 @login_required
@@ -48,15 +53,19 @@ def index():
     bar_chart_info = []
     # get names of providers and prices for plans from the output variable, then feed it to the bar chart
     bar_chart_info.append([output['name_1'], output['name_2'], output['name_3']])
-    bar_chart_info.append([output['compute_1'][1:], output['compute_2'][1:], output['compute_3'][1:]])
-    bar_chart_info.append([output['storage_1'][1:], output['storage_2'][1:], output['storage_3'][1:]])
-    bar_chart_info.append([output['data_transfer_1'][1:], output['data_transfer_2'][1:], output['data_transfer_3'][1:]])
+    bar_chart_info.append([output['compute_1'][1:], output['compute_2']
+                          [1:], output['compute_3'][1:]])
+    bar_chart_info.append([output['storage_1'][1:], output['storage_2']
+                          [1:], output['storage_3'][1:]])
+    bar_chart_info.append([output['data_transfer_1'][1:],
+                          output['data_transfer_2'][1:], output['data_transfer_3'][1:]])
     for i in range(1, len(bar_chart_info)):
         for j in range(len(bar_chart_info[i])):
             bar_chart_info[i][j] = int(bar_chart_info[i][j].replace(",", ""))
     chart = create_stacked_bar_chart(bar_chart_info)
 
-    return render_template("index.html", output=output, chart = chart)
+    return render_template("index.html", output=output, chart=chart)
+
 
 @app.route("/demo")
 @login_required
@@ -64,13 +73,14 @@ def demo():
     '''Render demo page'''
     return render_template("demo.html")
 
+
 @app.route("/input", methods=["GET", "POST"])
 @login_required
 def input():
     '''Render input page, receive input'''
 
     if request.method == "POST":
-        #Retrieve input from user
+        # Retrieve input from user
         providers = request.form.get("providers")
         industry = request.form.get("industry")
         timeframe = request.form.get("timeframe")
@@ -80,18 +90,20 @@ def input():
 
         # Store input into SQL database input table
         db.execute("INSERT INTO inputs (user_id, providers, industry, timeframe, usage, technicalDetails, attachments) VALUES (?, ?, ?, ?, ?, ?, ?);",
-                       session["user_id"], providers, industry, timeframe, usage, technicalDetails, attachments)
+                   session["user_id"], providers, industry, timeframe, usage, technicalDetails, attachments)
 
         # API call to assistant
         answer = apicall()
 
         # Store response into SQL database output table
-        db.execute("INSERT INTO outputs (user_id, response) VALUES (?, ?)", session["user_id"], answer)
+        db.execute("INSERT INTO outputs (user_id, response) VALUES (?, ?)",
+                   session["user_id"], answer)
 
         return redirect("/")
 
     else:
         return render_template("input.html")
+
 
 def apicall():
     '''API call to custom LLM'''
@@ -102,7 +114,8 @@ def apicall():
     os.environ["OPENAI_API_KEY"] = api_key
 
     # Get user input
-    input = db.execute("SELECT * FROM inputs WHERE user_id = %s ORDER BY id DESC LIMIT 1", session["user_id"])
+    input = db.execute(
+        "SELECT * FROM inputs WHERE user_id = %s ORDER BY id DESC LIMIT 1", session["user_id"])
 
     # Prompting values
     prompt = '''You are a finops expert with extensive knowledge in cloud computing, finops, and data analytics. You have previously worked at Amazon AWS, Microsoft Azure, Voltage Park, and every single cloud provider,  where you have worked as a key member of the FinOps teams.
@@ -211,16 +224,18 @@ Your response should be structured as follows in JSON format:
 
     return str(response_message.content[0].text.value)
 
+
 def extract():
     '''Extract structured info from LLM JSON output text'''
 
     # get output response with SQL query
-    output = db.execute("SELECT response FROM outputs WHERE user_id = %s ORDER BY id DESC LIMIT 1", session["user_id"])
+    output = db.execute(
+        "SELECT response FROM outputs WHERE user_id = %s ORDER BY id DESC LIMIT 1", session["user_id"])
     output = output[0]["response"] if output else "No response"
 
     # Check for valid output
-    if output=="No response":
-        #return [output]
+    if output == "No response":
+        # return [output]
         return output
 
     # Load string into JSON format
@@ -285,6 +300,7 @@ def login():
     else:
         return render_template("login.html")
 
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
@@ -318,6 +334,7 @@ def register():
 
     else:
         return render_template("register.html")
+
 
 @app.route("/logout")
 def logout():
