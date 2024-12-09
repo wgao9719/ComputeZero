@@ -37,7 +37,6 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-
 @app.route("/")
 @login_required
 def index():
@@ -50,6 +49,7 @@ def index():
 
     # Construct the barchart
     bar_chart_info = []
+    # get names of providers and prices for plans from the output variable, then feed it to the bar chart
     bar_chart_info.append([output['name_1'], output['name_2'], output['name_3']])
     bar_chart_info.append([output['compute_1'][1:], output['compute_2'][1:], output['compute_3'][1:]])
     bar_chart_info.append([output['storage_1'][1:], output['storage_2'][1:], output['storage_3'][1:]])
@@ -236,13 +236,17 @@ def extract():
     info_dict = {}
 
     def extract_info(d, parent_key=''):
+        '''extract info from given json schema'''
+        # Check top layer dictionaries
         if isinstance(d, dict):
             for k, v in d.items():
                 new_key = f"{k}" if parent_key else k
+                # Recursive call to next layer dictionary
                 extract_info(v, new_key)
         elif isinstance(d, list):
             for i, item in enumerate(d):
                 new_key = f"{parent_key}[{i}]"
+                # Recursive call to next layer dictionary
                 extract_info(item, new_key)
         else:
             info_dict[parent_key] = d
