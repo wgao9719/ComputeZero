@@ -1,0 +1,85 @@
+<!-- Extend layout template -->
+{% extends "layout.html" %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block main %}
+
+    <div class="container">
+        <h1>Dashboard Analytics</h1>
+        <div class="dashboard">
+
+            <!-- Print expected compute needs with buffer -->
+            <h3>Expected Compute Needs</h3>
+            <p>{{ output["Range"] }} ({{ output["Range With Buffer"] }})</p>
+
+            <h2>Top 3 Recommended Cloud Providers</h2>
+
+            <!-- Render interactive stacked bar chart from plotly-->
+            <div>
+                {{ chart|safe }}
+            </div>
+
+            <!-- Print details about Provider 1 -->
+            <div class="provider">
+                <h3>1. {{ output["name_1"] }} </h3>
+                <p><strong>Recommended Service:</strong> {{ output["recommended_service_1"] }} </p>
+                <p><strong>Expected Cost Per Unit:</strong> {{ output["expected_cost_per_service_1"] }} </p>
+                <p><strong>Total Cost:</strong> {{ output["expected_total_cost_1"] }} </p>
+
+                <div class="cost-breakdown">
+                    <h4>Cost Breakdown:</h4>
+                    <ul>
+                        <li>Compute: {{ output["compute_1"] }}</li>
+                        <li>Storage: {{ output["storage_1"] }}</li>
+                        <li>Data Transfer: {{ output["data_transfer_1"] }}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Print details about Provider 2 -->
+            <div class="provider">
+                <h3>2. {{ output["name_2"] }} </h3>
+                <p><strong>Recommended Service:</strong> {{ output["recommended_service_2"] }} </p>
+                <p><strong>Expected Cost Per Unit:</strong> {{ output["expected_cost_per_service_2"] }} </p>
+                <p><strong>Total Cost:</strong> {{ output["expected_total_cost_2"] }} </p>
+
+                <div class="cost-breakdown">
+                    <h4>Cost Breakdown:</h4>
+                    <ul>
+                        <li>Compute: {{ output["compute_2"] }}</li>
+                        <li>Storage: {{ output["storage_2"] }}</li>
+                        <li>Data Transfer: {{ output["data_transfer_2"] }}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Print details about Provider 3 -->
+            <div class="provider">
+                <h3>3. {{ output["name_3"] }} </h3>
+                <p><strong>Recommended Service:</strong> {{ output["recommended_service_3"] }} </p>
+                <p><strong>Expected Cost Per Unit:</strong> {{ output["expected_cost_per_service_3"] }} </p>
+                <p><strong>Total Cost:</strong> {{ output["expected_total_cost_3"] }} </p>
+
+                <div class="cost-breakdown">
+                    <h4>Cost Breakdown:</h4>
+                    <ul>
+                        <li>Compute: {{ output["compute_3"] }}</li>
+                        <li>Storage: {{ output["storage_3"] }}</li>
+                        <li>Data Transfer: {{ output["data_transfer_3"] }}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Print explanation about recommended services and plans -->
+            <h3>Explanation</h3>
+            <p> {{ output["Explanation"] }} </p>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+
