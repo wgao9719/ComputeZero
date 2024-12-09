@@ -1,3 +1,5 @@
+Wrapper!
+
 Our project was constructed in three components: input frontend, backend (API calls and SQL interfacing), output frontend
 
 The overarching goal of the input frontend is to retrieve information and store it for a unique user. Hence, we implement login functionality, where the user can access register and login pages.
