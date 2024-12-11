@@ -72,13 +72,14 @@ Internal SQLite table used to track auto-incremented fields.
 
 ## How to Run the Project
 
-1. Install dependencies.  
-2. Navigate into the project folder and run `flask run` in the terminal.  
-3. Access the app in your browser using the provided link.  
-4. Register for an account through the registration page.  
-5. Log in through the login page.  
-6. Go to the input form and input details about your project.  
-7. View the recommended plans and pricing.  
+1. Install dependencies.
+2. Add OpenAI API key to app.py at [INSERT_API_KEY]
+3. Navigate into the project folder and run `flask run` in the terminal.  
+4. Access the app in your browser using the provided link.  
+5. Register for an account through the registration page.  
+6. Log in through the login page.  
+7. Go to the input form and input details about your project.  
+8. View the recommended plans and pricing.  
 
 ---
 
