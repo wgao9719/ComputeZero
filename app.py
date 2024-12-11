@@ -109,8 +109,8 @@ def apicall():
     '''API call to custom LLM'''
 
     # Set up API key and environment
-    openai.api_key = "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"
-    api_key = "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"
+    openai.api_key = [INSERT_API_KEY]
+    api_key = [INSERT_API_KEY]
     os.environ["OPENAI_API_KEY"] = api_key
 
     # Get user input
