@@ -36,7 +36,7 @@ Youtube Demo: https://youtu.be/kvSZY3w0fZU
 - **`requirements.txt`**: Lists all dependencies and imports.  
 - **`users.db`**: SQLite database containing `users`, `inputs`, and `outputs` tables.  
 
----
+----
 
 ## SQL Database (`users.db`) Structure
 
