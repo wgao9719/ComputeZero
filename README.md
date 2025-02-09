@@ -81,7 +81,7 @@ Internal SQLite table used to track auto-incremented fields.
 7. Go to the input form and input details about your project.  
 8. View the recommended plans and pricing.  
 
----
+----
 
 ## How to Use the Input Form
 
