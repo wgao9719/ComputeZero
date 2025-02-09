@@ -68,7 +68,7 @@ Internal SQLite table used to track auto-incremented fields.
 - `name`: Name of the table with auto-increment  
 - `seq`: Last sequence number used  
 
----
+----
 
 ## How to Run the Project
 
