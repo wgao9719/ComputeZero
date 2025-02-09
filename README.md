@@ -9,7 +9,7 @@ Youtube Demo: https://youtu.be/kvSZY3w0fZU
 ### Import Requirements
 `cs50`, `flask`, `requests`, `plotly`, `sqlite3`, `openai`, `json`, `werkzeug`, `datetime`, `functools`
 
----
+----
 
 ## Folder Contents
 
