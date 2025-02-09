@@ -19,7 +19,7 @@ Youtube Demo: https://youtu.be/kvSZY3w0fZU
 - **Main Folder**: Core files  
   - `app.py`, `helpers.py`, `users.db`
 
----
+----
 
 ## Relevant File Contents
 
