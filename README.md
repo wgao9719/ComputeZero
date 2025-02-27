@@ -4,8 +4,6 @@
 This project is a cloud compute recommendation tool designed to help users select the best cloud provider for their needs based on specified input parameters.  
 Implemented with Python, SQL, HTML, and CSS.
 
-Youtube Demo: https://youtu.be/kvSZY3w0fZU
-
 ### Import Requirements
 `cs50`, `flask`, `requests`, `plotly`, `sqlite3`, `openai`, `json`, `werkzeug`, `datetime`, `functools`
 
